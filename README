@@ -1,0 +1,35 @@
+Basically, this is a collection of quickly-written scripts that are designed to make grading a little bit
+easier. There's plenty of room for improvement: notably, I think you could save time by compiling student
+labs in their own directories in bulk, before doing anything that requires manual interaction. You could 
+do the same with testing; but I'd be careful about blindly running code from another source (you should be
+able to trust students but you never know), so I'd still ensure that the testing step comes AFTER you review
+for code quality. 
+
+The scripts are fairly tightly-coupled to my own personal procedures and conventions that I developed as a TA.
+They generally assume a particular directory structure and submission format. Here's how I used them:
+
+For submitting their labs, I would ask students to turn in their labs as tar.gz files that, even
+if only one or two files were needed. Students sent them in by email, hopefully with appropriate subject
+lines that make lab submissions easy to filter out (I also used a manual tagging system though, where I could
+tag labs as they came in and easily see them all together later). Then I would just sort the messages by date
+and export the attachments in batches (using a Thunderbird extension that let me download attachments from 
+multiple messages at once) based on the day they came in (that is, whether the lab is on time, 1 day late, etc).
+
+I'd place each batch of submissions in a corresponding folder: 0day for everything on time, 1day for 1 day lates,
+and so on. Usually each time the grade.py script would then have to be tweaked a little to match the specifics
+of compiling for that lab. After that, the scripts do most of the work (see each file for more detail):
+
+extract.py just extracts all the tar.gz files to simple folders containing each student submission, for example
+0day/rconnor6.tar.gz becomes 0day/rconnor. It also tries to help normalize the format a little bit by removing
+superfluous directory structure.
+
+grade.py handles the actual grading. It enumerates student folders under the given 'nday' folder and showsy
+you student code so you can review for quality points, then  compiles it and tests it automatically. It stores 
+the results for each lab back in the student's folder in a file called report.txt. Normally, the grader skips
+over directories that already have this file (this makes it really easy to stop and start where you left off)
+so if you want to re-do one then you can just delete the file, e.g. ./0day/rconnor6/report.txt
+
+collect.py should be run after all grading is done; it just goes through the reports and collects all the grades
+into one file, and sends emails out to students. Don't do this unless you're really sure you're done.
+
+

@@ -1,0 +1,3 @@
+{netid},
+
+Your lab grades are as follows:

@@ -1,0 +1,11 @@
+{netid},
+
+Your final grade on Lab {labnum} is: {grade}
+  Gradescript: {gradescript_correct}/{gradescript_possible}
+  Quality points: {quality_points}
+  {days_late} days late: -{late_factor}
+
+Comments:
+    Code:       {code-comments}
+    Memory:     {memory-comments}
+    Other:      {special-comment}
